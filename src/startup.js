@@ -1,0 +1,58 @@
+// load .env file
+require('dotenv').config();
+
+// init express
+const express = require('express');
+
+const app = express();
+
+// express options
+const envType = process.env.NODE_ENV || 'development';
+const isDevelopment = (envType === 'development');
+
+if (isDevelopment) {
+    app.set('json spaces', 4);
+}
+app.set('x-powered-by', false);
+
+// init express middlewares
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// init express router
+const routes = require('./routes');
+
+const routerModule = require('express').Router; // express.Router
+
+const router = routerModule();
+
+routes(router, app);
+
+// enable routing definitons
+app.use('/', router);
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+    const err = new Error('Not Found');
+
+    err.status = 404;
+
+    next(err);
+});
+
+// error handler
+app.use((err, req, res, next) => {
+    const response = {
+        message: err.message,
+    };
+
+    if (isDevelopment) {
+        response.error = err;
+    }
+
+    // render the error page
+    res.status(err.status || 500);
+    res.json(response);
+});
+
+module.exports = app;

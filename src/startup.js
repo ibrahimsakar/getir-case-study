@@ -11,7 +11,7 @@ const envType = process.env.NODE_ENV || 'development';
 const isDevelopment = (envType === 'development');
 
 if (isDevelopment) {
-    app.set('json spaces', 4);
+  app.set('json spaces', 4);
 }
 app.set('x-powered-by', false);
 
@@ -20,9 +20,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // init express router
-const routes = require('./routes');
-
 const routerModule = require('express').Router; // express.Router
+const routes = require('./routes');
 
 const router = routerModule();
 
@@ -33,26 +32,26 @@ app.use('/', router);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-    const err = new Error('Not Found');
+  const err = new Error('Not Found');
 
-    err.status = 404;
+  err.status = 404;
 
-    next(err);
+  next(err);
 });
 
 // error handler
-app.use((err, req, res, next) => {
-    const response = {
-        message: err.message,
-    };
+app.use((err, req, res) => {
+  const response = {
+    message: err.message,
+  };
 
-    if (isDevelopment) {
-        response.error = err;
-    }
+  if (isDevelopment) {
+    response.error = err;
+  }
 
-    // render the error page
-    res.status(err.status || 500);
-    res.json(response);
+  // render the error page
+  res.status(err.status || 500);
+  res.json(response);
 });
 
 module.exports = app;

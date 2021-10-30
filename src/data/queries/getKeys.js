@@ -1,53 +1,44 @@
-const { connectMongo } = require('../../utils/connectMongo');
+const { getDbObject } = require('../../utils/getDbObject');
 
 const fetchKeys = async (postParams) => {
-  const client = await connectMongo();
+  const db = await getDbObject();
 
-  const db = client.db(process.env.DB_NAME);
-
-  let dataSet;
-  try {
-    dataSet = await db.collection('records').aggregate([
-      {
-        $match: {
-          $and: [
-            { createdAt: { $gte: new Date(postParams.startDate) } },
-            { createdAt: { $lte: new Date(postParams.endDate) } },
-          ],
+  const query = [
+    {
+      $match: {
+        $and: [
+          { createdAt: { $gte: new Date(postParams.startDate) } },
+          { createdAt: { $lte: new Date(postParams.endDate) } },
+        ],
+      },
+    },
+    {
+      $set: {
+        totalCount: {
+          $sum: '$counts',
         },
       },
-      {
-        $set: {
-          totalCount: {
-            $sum: '$counts',
-          },
-        },
+    },
+    {
+      $match: {
+        $and: [
+          { totalCount: { $gte: postParams.minCount } },
+          { totalCount: { $lte: postParams.maxCount } },
+        ],
       },
-      {
-        $match: {
-          $and: [
-            { totalCount: { $gte: postParams.minCount } },
-            { totalCount: { $lte: postParams.maxCount } },
-          ],
-        },
-      },
-      {
-        $unset: 'counts',
-      },
-      {
-        $unset: 'value',
-      },
-      {
-        $unset: '_id',
-      },
-    ]).toArray();
+    },
+    {
+      $unset: 'counts',
+    },
+    {
+      $unset: 'value',
+    },
+    {
+      $unset: '_id',
+    },
+  ];
 
-    return dataSet;
-  } catch (error) {
-    console.log(error);
-  } finally {
-    client.close();
-  }
+  const dataSet = await db.collection('records').aggregate(query).toArray();
 
   return dataSet;
 };

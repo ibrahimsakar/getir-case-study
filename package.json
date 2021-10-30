@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "start": "node ./src/index.js",
     "start:prod": "cross-env NODE_ENV=production PORT=80 node ./src/index.js",
     "start:test": "cross-env NODE_ENV=testing PORT=80 node ./src/index.js"
   },

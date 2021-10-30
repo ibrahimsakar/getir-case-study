@@ -14,7 +14,8 @@
 
 #### Cloning repo and Installation of Dependencies
 ```
-git clone https://github.com/ibrahimsakar/getir-case-study.git or gh repo clone ibrahimsakar/getir-case-study
+git clone https://github.com/ibrahimsakar/getir-case-study.git
+# or gh repo clone ibrahimsakar/getir-case-study
 
 cd getir-case-study
 

@@ -9,5 +9,4 @@ module.exports = {
     'json',
     'mjs'
   ],
-  'setupFiles': ["<rootDir>/.jest/setEnvVars.js"],
 };

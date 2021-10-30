@@ -1,4 +1,4 @@
-const { connectMongo } = require('./connectMongo');
+const { connectMongo } = require('./mongo');
 
 const getDbObject = async () => {
   const client = await connectMongo();

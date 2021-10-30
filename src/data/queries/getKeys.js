@@ -1,8 +1,6 @@
-const { getDbObject } = require('../../utils/getDbObject');
+const { useDbObject } = require('../../utils/mongo');
 
 const fetchKeys = async (postParams) => {
-  const db = await getDbObject();
-
   const query = [
     {
       $match: {
@@ -38,9 +36,11 @@ const fetchKeys = async (postParams) => {
     },
   ];
 
-  const dataSet = await db.collection('records').aggregate(query).toArray();
+  return useDbObject((db) => {
+    const dataSet = db.collection('records').aggregate(query).toArray();
 
-  return dataSet;
+    return dataSet;
+  });
 };
 
 module.exports = {

@@ -6,4 +6,6 @@ async function getKeys(app, headers, postParams) {
   return { code: 0, msg: 'Success', records: apiResult };
 }
 
-module.exports = getKeys;
+module.exports = {
+  getKeys,
+};

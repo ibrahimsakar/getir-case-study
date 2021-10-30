@@ -40,13 +40,19 @@ app.use((req, res, next) => {
 });
 
 // error handler
+function fixErrorObjectResult(err) {
+  const serialized = JSON.stringify(err, Object.getOwnPropertyNames(err));
+
+  return JSON.parse(serialized);
+}
+
 app.use((err, req, res) => {
   const response = {
     message: err.message,
   };
 
   if (isDevelopment) {
-    response.error = err;
+    response.error = fixErrorObjectResult(err);
   }
 
   // render the error page

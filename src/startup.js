@@ -1,5 +1,5 @@
 // load .env file
-require('dotenv').config();
+require('dotenv-flow').config();
 
 // init express
 const express = require('express');

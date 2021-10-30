@@ -1,4 +1,4 @@
-const { fetchKeys } = require('../utils/mongoQueries');
+const { fetchKeys } = require('../data/queries/getKeys');
 
 async function getKeys(app, headers, postParams) {
   const apiResult = await fetchKeys(postParams);

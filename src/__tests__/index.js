@@ -1,7 +1,7 @@
 // load .env file
 require('dotenv').config();
 
-const { fetchKeys } = require('../utils/mongoQueries');
+const { fetchKeys } = require('../data/queries/getKeys');
 
 describe('Tests', () => {
   it('it should fetch keys', async () => {

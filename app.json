@@ -1,0 +1,7 @@
+{
+    "name": "Getir Case Study",
+    "description": "A Node.js app using Express and MongoDB",
+    "repository": "https://github.com/ibrahimsakar/getir-case-study",
+    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "keywords": ["node", "express", "mongo"]
+  }

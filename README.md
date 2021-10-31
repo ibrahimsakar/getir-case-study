@@ -9,6 +9,7 @@
 2. [Endpoints](#endpoints)
     * [Keys](#keys)
         - [/getKeys](#/getKeys)
+3. [Deploy to Your Account](#deploy-to-your-account)
 
 
 ## Installation
@@ -84,3 +85,11 @@ You need to add the MONGO_CONNECTIONSTRING environment variable to your docker-c
     ]
 }
 ```
+
+
+## Deploy To Your Account
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ibrahimsakar/getir-case-study)
+
+
+### **Don't forget to set MONGO_CONNECTIONSTRING environment variable.**

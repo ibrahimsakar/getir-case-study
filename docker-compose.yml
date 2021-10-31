@@ -1,0 +1,35 @@
+version: '3.8'
+
+networks:
+  project-net:
+    driver: bridge
+
+services:
+  app_mongo:
+    image: 'mongo:latest'
+    container_name: app_mongo
+    ports:
+    - 27017:27017
+    environment:
+      PUID: 1000
+      PGID: 1000
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpwd
+      MONGO_INITDB_DATABASE: appdb
+    volumes:
+    - ./data/db:/data/db
+    - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+    - project-net
+    restart: unless-stopped
+
+  app:
+    build: .
+    container_name: app
+    ports:
+      - 3000:3000
+    extra_hosts:
+    - 'host.docker.internal:host-gateway'
+    networks:
+    - project-net
+    restart: always

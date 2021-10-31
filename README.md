@@ -5,6 +5,7 @@
 1. [Installation](#installation)
     * [Cloning repo and installation of dependencies](#cloning-repo-and-installation-of-dependencies)
     * [Testing](#testing)
+    * [Warning for Docker](#warning-for-docker)
 2. [Endpoints](#endpoints)
     * [Keys](#keys)
         - [/getKeys](#/getKeys)
@@ -25,6 +26,13 @@ npm install
 #### Testing
 ```
 npm test
+```
+
+
+### **WARNING FOR DOCKER**
+
+```
+You need to add the MONGO_CONNECTIONSTRING environment variable to your docker-compose.yml.
 ```
 
 

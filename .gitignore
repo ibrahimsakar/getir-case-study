@@ -1,6 +1,9 @@
 # vscode
 .vscode
 
+# Data directories
+data/
+
 # Dependency directories
 node_modules/
 

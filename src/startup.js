@@ -3,6 +3,7 @@ require('dotenv-flow').config();
 
 // init express
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.set('x-powered-by', false);
 // init express middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(morgan('dev'));
 
 // init express router
 const routerModule = require('express').Router; // express.Router
@@ -39,7 +41,7 @@ app.use((req, res, next) => {
   next(err);
 });
 
-// error handler
+// error handlers
 function fixErrorObjectResult(err) {
   const serialized = JSON.stringify(err, Object.getOwnPropertyNames(err));
 
